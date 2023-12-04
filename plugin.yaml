@@ -1,0 +1,6 @@
+plugin:
+    name: 'tecnotrade.mallextraadmin::lang.plugin.name'
+    description: 'tecnotrade.mallextraadmin::lang.plugin.description'
+    author: Tecnotrade
+    icon: oc-icon-adjust
+    homepage: ''
