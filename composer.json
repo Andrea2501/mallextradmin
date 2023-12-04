@@ -1,0 +1,23 @@
+{
+    "name": "tecnotrade/mallextraadmin-plugin",
+    "type": "october-plugin",
+    "description": "Mall Product Indivisual Management By Admin for October CMS",
+    "homepage": "https://tecnotrade.com",
+    "keywords": ["october", "octobercms", "admin", "mall", "backend"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrea Berni",
+            "email": "andrea@tecnotrade.com",
+            "role": "Developer"
+        }
+        
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "october/rain": ">=3.4",
+        "composer/installers": "~1.0",
+        "offline/oc-mall-plugin:": "~1.0"
+    },
+    "minimum-stability": "dev"
+}
