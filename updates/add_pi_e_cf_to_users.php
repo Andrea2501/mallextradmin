@@ -3,23 +3,24 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class AddCodeAgenteToUserModel extends Migration
+class AddPiECfToUsers extends Migration
 {
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('code_agente')->nullable();
-
+                        
+            $table->string('partitaiva')->nullable();
+            $table->string('codicefiscale')->nullable();
+            
         });
     }
 
     public function down()
     {
         Schema::table('users', function ($table) {
-            $table->dropColumn('code_agente');
+            $table->dropColumn('partitaiva');
+            $table->dropColumn('codicefiscale');
             
-
         });
     }
 }
-

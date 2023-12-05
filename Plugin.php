@@ -10,6 +10,7 @@ use Backend\Facades\BackendAuth as BackAuth;
 use Exception as AppException;
 use Rainlab\User\Models\User as UserModel;
 use Rainlab\User\Controllers\Users as UsersController;
+use Input;
 
 
 /**
@@ -201,15 +202,29 @@ class Plugin extends PluginBase
             }
 
             $form->addTabFields([
+                
+                'partitaiva'=>[
+                    'label'=> 'Partita iva',
+                    'type'=>'Text',
+                    'span'=>'left',
+                    'tab'=>'rainlab.user::lang.user.account' 
+                ],
+                'codicefiscale'=>[
+                    'label'=> 'Codice fiscale',
+                    'type'=>'Text',
+                    'span'=>'right',
+                    'tab'=>'rainlab.user::lang.user.account' 
+                ],
                 'code_agente' => [
                     'label' => 'Codice agente',
                     'type' => 'text',
                     'span' => 'left',
-                    'tab'=> 'Agente'
+                    'tab'=> 'rainlab.user::lang.user.account'
                     
                                
-                ]
+                ],
             ]);
+            
             
         });
         UsersController::extendListColumns(function($list, $model){
@@ -225,6 +240,95 @@ class Plugin extends PluginBase
                 ]
             ]);
         });
-    } 
+    }
+    
+    protected function extendUserModelForSignup(){
+        UserModel::extend(function ($model) {
+            $model->addFillable(['phone']); // Crea il campo fillable, senza il quale non puoi salvare il campo
+            $model->addFillable(['partitaiva']); // Crea il campo fillable, senza il quale non puoi salvare il campo
+            $model->addFillable(['codicefiscale']);
+            $model->addFillable(['company']);
+            $model->addFillable(['street_addr']);
+            $model->addFillable(['city']);
+            $model->addFillable(['zip']);
+            $model->addFillable(['state_id']);
+            $model->addFillable(['country_id']);
+            
+            
+            
+            
+            // Aggiungi regole di validazione personalizzate per il campo 'phone
+
+            $model->attributeNames = [
+                'phone' => trans('tecnotrade.mallextraadmin::lang.attributes.phone')
+            ];
+            $model->attributeNames = [
+                'partitaiva' => trans('tecnotrade.mallextraadmin::lang.attributes.partitaiva')
+            ];
+            $model->attributeNames = [
+                'codicefiscale' => trans('tecnotrade.mallextraadmin::lang.attributes.partitaiva')
+            ];
+            
+            // Prima di convalidare il modello User, aggiungi il valore dell'attributo phone dai dati del modulo di invio
+            $model->bindEvent('model.beforeValidate', function () use ($model) {
+                
+                if (Input::has('phone') ) {
+                    $phone = Input::get('phone');
+                    $model->phone = $phone;
+                }
+                if (Input::has('partitaiva') ) {
+                    $vat = Input::get('partitaiva');
+                    $model->partitaiva = $vat;
+                }
+
+                if (Input::has('codicefiscale') ) {
+                    $cf = Input::get('codicefiscale');
+                    $model->codicefiscale = $cf;
+                }
+                
+                if (Input::has('billing_company') ) {
+                    $rs = Input::get('billing_company');
+                    $model->company = $rs;
+                }
+                if (Input::has('billing_lines') ) {
+                    $indirizzo = Input::get('billing_lines');
+                    $model->street_addr = $indirizzo;
+                }
+                if (Input::has('billing_zip') ) {
+                    $zip = Input::get('billing_zip');
+                    $model->zip = $zip;
+                }
+                if (Input::has('billing_city') ) {
+                    $city = Input::get('billing_city');
+                    $model->city = $city;
+                }
+                if (Input::has('billing_country_id') ) {
+                    $country = Input::get('billing_country_id');
+                    $model->country_id = $country;
+                }
+                if (Input::has('billing_state_id') ) {
+                    $state = Input::get('billing_state_id');
+                    $model->state_id = $state;
+                }
+                  
+                
+                
+            });
+                    
+        });
+    }
+
+    protected function extraRulesForSignupUser(){
+        \Event::listen('mall.customer.extendSignupRules', function (&$rules, $forSignup) {
+            // Aggiungi le tue regole di validazione personalizzate per il campo 'phone' qui
+                $rules['phone'] = 'required|numeric|digits_between:7,16';
+                $rules['partitaiva'] = 'required|unique:users,partitaiva';
+                $rules['billing_company']='required';
+                
+                //$arrV=json_decode(($v));
+               
+                
+            });
+    }
 
 }

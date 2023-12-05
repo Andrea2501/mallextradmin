@@ -16,4 +16,7 @@ v1.0.6:
     - builder_table_update_tecnotrade_mallextraadmin_agenti.php
 v1.0.7:
     - 'Aggiungo Codice Agente a Tabella Rainlab Users'
-    - add_code_agente_to_user_model.php    
+    - add_code_agente_to_user_model.php
+v1.0.8:
+    - 'Aggiungo Partita Iva E Cfiscale a Tabella Rainlab Users'
+    - add_pi_e_cf_to_users.php            
