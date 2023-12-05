@@ -1,0 +1,41 @@
+fields:
+    cognome:
+        label: Cognome
+        span: auto
+        type: text
+    nome:
+        label: Nome
+        span: auto
+        type: text
+    email:
+        label: Email
+        span: auto
+        required: 1
+        type: text
+    codice_agente:
+        label: 'Codice agente'
+        span: auto
+        required: 1
+        type: text
+    password:
+        label: Password
+        span: auto
+        type: password
+    indirizzo:
+        label: Indirizzo
+        size: tiny
+        span: auto
+        type: textarea
+    mobile:
+        label: Mobile
+        span: auto
+        type: text
+    telefono_2:
+        label: 'Telefono 2'
+        span: left
+        type: text
+    note:
+        label: Note
+        size: ''
+        span: left
+        type: textarea

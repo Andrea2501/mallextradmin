@@ -1,4 +1,4 @@
-<?php Namespace Tecnotrade\Mallfornitori\Updates;
+<?php Namespace Tecnotrade\Mallextraadmin\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;

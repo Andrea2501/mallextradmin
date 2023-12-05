@@ -4,3 +4,13 @@ plugin:
     author: Tecnotrade
     icon: oc-icon-adjust
     homepage: ''
+navigation:
+    main-menu-item:
+        label: 'Gestione Agenti'
+        url: /
+        icon: icon-life-ring
+        sideMenu:
+            side-menu-item:
+                label: Agenti
+                url: tecnotrade/mallextraadmin/mallagenticontroller
+                icon: icon-table

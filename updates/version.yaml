@@ -6,7 +6,14 @@ v1.0.3:
     - 'Aggiungo Campo Codice A backend users'
     - add_code_field_to_backend_user.php
 v1.0.4:
-    - 'Aggiungo il campo codice proprietario prodotto a model prodotto'            
+    - 'Aggiungo il campo codice proprietario prodotto a model prodotto'
     - add_backend_user_code_to_product.php
-
-    
+v1.0.5:
+    - 'Created table tecnotrade_mallextraadmin_agenti'
+    - builder_table_create_tecnotrade_mallextraadmin_agenti.php
+v1.0.6:
+    - 'Updated table tecnotrade_mallextraadmin_agenti'
+    - builder_table_update_tecnotrade_mallextraadmin_agenti.php
+v1.0.7:
+    - 'Aggiungo Codice Agente a Tabella Rainlab Users'
+    - add_code_agente_to_user_model.php    

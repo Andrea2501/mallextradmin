@@ -1,0 +1,37 @@
+columns:
+    id:
+        label: id
+        type: number
+    cognome:
+        label: cognome
+        type: text
+    nome:
+        label: nome
+        type: text
+    email:
+        label: email
+        type: text
+    indirizzo:
+        label: indirizzo
+        type: text
+    codice_agente:
+        label: codice_agente
+        type: text
+    password:
+        label: password
+        type: text
+    mobile:
+        label: mobile
+        type: text
+    telefono_2:
+        label: telefono_2
+        type: text
+    note:
+        label: note
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime

@@ -8,7 +8,8 @@ use Backend\Models\User as BackendUserModel;
 use Backend\Controllers\Users as BackendUserController;
 use Backend\Facades\BackendAuth as BackAuth;
 use Exception as AppException;
-
+use Rainlab\User\Models\User as UserModel;
+use Rainlab\User\Controllers\Users as UsersController;
 
 
 /**
@@ -41,6 +42,9 @@ class Plugin extends PluginBase
 
        // estendo la funzione di creazione del prodotto
        $this->extendModelProductCreate();
+
+       //estendo il modello customer aggiungendo il campo codice_agente
+       $this->extendCustomerModel();
        
             
         
@@ -189,5 +193,38 @@ class Plugin extends PluginBase
         });
     
     }
+
+    protected function extendCustomerModel(){
+        UsersController::extendFormFields(function($form, $model, $context) {
+            if (!$model instanceof UserModel) {
+                return;
+            }
+
+            $form->addTabFields([
+                'code_agente' => [
+                    'label' => 'Codice agente',
+                    'type' => 'text',
+                    'span' => 'left',
+                    'tab'=> 'Agente'
+                    
+                               
+                ]
+            ]);
+            
+        });
+        UsersController::extendListColumns(function($list, $model){
+            if (!$model instanceof UserModel) {
+                return;
+            }
+            $list->addColumns([
+                'code_agente' => [
+                    'label' => 'Codice agente',
+                    'type' => 'text',
+                    'sortable' => true,
+                    'invisible' => false,
+                ]
+            ]);
+        });
+    } 
 
 }

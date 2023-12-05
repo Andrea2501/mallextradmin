@@ -1,0 +1,10 @@
+name: MallAgentiController
+form: $/tecnotrade/mallextraadmin/models/mallagentimodel/fields.yaml
+modelClass: Tecnotrade\Mallextraadmin\Models\MallAgentiModel
+defaultRedirect: tecnotrade/mallextraadmin/mallagenticontroller
+create:
+    redirect: 'tecnotrade/mallextraadmin/mallagenticontroller/update/:id'
+    redirectClose: tecnotrade/mallextraadmin/mallagenticontroller
+update:
+    redirect: tecnotrade/mallextraadmin/mallagenticontroller
+    redirectClose: tecnotrade/mallextraadmin/mallagenticontroller
