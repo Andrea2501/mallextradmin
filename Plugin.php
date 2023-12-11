@@ -203,7 +203,7 @@ class Plugin extends PluginBase
                 $codiceBackendUser=$backendUser["userCode"];
                 $ruoloUtente=$backendUser["userRole"];
                 $userRoleCode=$backendUser["userRoleCode"];
-                $model->owner_code=$userRoleCode;
+                $model->owner_code=$codiceBackendUser;
                 
             });
         });
