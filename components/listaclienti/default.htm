@@ -1,0 +1,75 @@
+{# dd (this.session.all) #}
+
+<div class="container">
+    <section>
+        <div class="col-12">
+            <a href="/{{ urlHomeAgente }}">{{ 'tecnotrade.mallextraadmin::lang.goto_home_agente' | trans }}</a>
+        </div>    
+    </section>
+</div>
+
+{% if displayType != "1" %}
+<div class="container">
+    <section>
+        <div class="col-12">
+            <h3 class="mall-signup__heading">{{ 'tecnotrade.mallextraadmin::lang.no_permission' | trans }}</h3>
+        </div>    
+    </section>
+</div>
+
+
+{% elseif agente_is_impersonate == "1" %}
+
+<div class="container">
+    <div class="section">
+        <div id="impersonate_user_info">
+            <p>
+                {{'tecnotrade.mallextraadmin::lang.used_user' | trans}}: {{user_impersonate.company}}
+                <br>
+                <form data-request="onLogoutImpersonateCliente" data-request-validate data-request-flash>
+                    <input type="hidden" name="idutente" value="{{user_impersonate.id}}">
+                        <div class="mall-form-actions">
+                        <button class="mall-btn mall-btn-signup mall-btn--primary mall-btn--full" type="submit">
+                            {{ 'tecnotrade.mallextraadmin::lang.unlink_user' | trans }}
+                        </button>
+                    </div>
+                </form>
+               
+            </p>
+        </div>
+    </div>
+</div>
+                
+
+    
+    {% else %}
+    {% set results = frontendUser %}
+    {% if results.count %}
+    <div class="container">
+    <div id="tecno-mall-searchcustomer">
+        <span>Cerca cliente:</span> 
+        <input type="text" 
+         id="tecno-txtCustomerSearch" 
+         name="tecno-txtCustomerSearch" value="" class="mall-input mall-input-sm mb-0 form-control">
+     </div>
+     </div>
+    <div class="container">
+        <section>
+            <div class="col-12">
+                <h3 class="mall-signup__heading">{{ 'tecnotrade.mallextraadmin::lang.client_list' | trans }}</h3>
+            </div>    
+        </section>
+        <div class="section" id="table-customers">
+        {% partial __SELF__ ~ '::items' items = results %}
+        </div>    
+        <div class="section" id="pga">
+        {% partial __SELF__ ~ '::paginate' results = results %}
+        </div>    
+    </div>
+    
+
+    {% else %}
+        {% partial __SELF__ ~ '::empty' %}
+    {% endif %}
+
+{% endif %}

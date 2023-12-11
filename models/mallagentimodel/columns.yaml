@@ -17,9 +17,6 @@ columns:
     codice_agente:
         label: codice_agente
         type: text
-    password:
-        label: password
-        type: text
     mobile:
         label: mobile
         type: text

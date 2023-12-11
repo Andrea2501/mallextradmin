@@ -21,5 +21,22 @@
          'billing_company'=>[
             'required' => 'La ragione sociale è obbligatoria.',
          ]
-    ],    
+    ],
+    'register_new_buyer' => 'Registra un nuovo cliente',
+    'no_permission'=>'Non hai i permessi necessari per vedere questa pagina', 
+    'welcome_agent'=>'Bentornato: ',
+    'home_agent'=>'Home Page Agente',
+    'vat'=>'Partita Iva',
+    'fiscal_code'=>'Codice Fiscale',
+    'phone'=>'Telefono',
+    'client_list'=>'Elenco Clienti',
+    'company'=>'Ragione Sociale',
+    'email'=>'E-Mail',
+    'impersonate'=>'Usa Cliente',
+    'use_client'=>'Seleziona',
+    'used_user'=>'Stai usando il cliente:',
+    'unlink_user'=>'Cambia utente', 
+    'goto_customer_list'=>'Vai a elenco clienti',
+    'goto_home_agente'=>'Torna alla home' 
+         
 ];

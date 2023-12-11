@@ -11,6 +11,8 @@ use Exception as AppException;
 use Rainlab\User\Models\User as UserModel;
 use Rainlab\User\Controllers\Users as UsersController;
 use Input;
+use Session;
+use Route;
 
 
 /**
@@ -23,6 +25,9 @@ class Plugin extends PluginBase
      */
     public function register()
     {
+        Route::post('/listaclienti/impersonatecliente',function(\Illuminate\Http\Request $request) {
+            return (new \Tecnotrade\Mallextraadmin\Components\ListaClienti())->onImpersonateCliente($request);
+        });
     }
 
     /**
@@ -46,7 +51,12 @@ class Plugin extends PluginBase
 
        //estendo il modello customer aggiungendo il campo codice_agente
        $this->extendCustomerModel();
+
+       $this->extendUserModelForSignup();
+
+       $this->extraRulesForSignupUser();
        
+      
             
         
 
@@ -57,6 +67,11 @@ class Plugin extends PluginBase
      */
     public function registerComponents()
     {
+        return [
+            'Tecnotrade\Mallextraadmin\Components\LoginAgente'=> 'LoginAgente',
+            'Tecnotrade\Mallextraadmin\Components\InfoAgente'=> 'InfoAgente',
+            'Tecnotrade\Mallextraadmin\Components\ListaClienti'=> 'ListaClienti',
+        ];
     }
 
     /**
@@ -266,7 +281,7 @@ class Plugin extends PluginBase
                 'partitaiva' => trans('tecnotrade.mallextraadmin::lang.attributes.partitaiva')
             ];
             $model->attributeNames = [
-                'codicefiscale' => trans('tecnotrade.mallextraadmin::lang.attributes.partitaiva')
+                'codicefiscale' => trans('tecnotrade.mallextraadmin::lang.attributes.codicefiscale')
             ];
             
             // Prima di convalidare il modello User, aggiungi il valore dell'attributo phone dai dati del modulo di invio
@@ -330,5 +345,7 @@ class Plugin extends PluginBase
                 
             });
     }
+
+  
 
 }

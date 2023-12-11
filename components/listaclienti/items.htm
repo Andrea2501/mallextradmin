@@ -1,0 +1,16 @@
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">{{ 'tecnotrade.mallextraadmin::lang.company' | trans}}</th>
+        <th scope="col">{{ 'tecnotrade.mallextraadmin::lang.vat' | trans }}</th>
+        <th scope="col">{{ 'tecnotrade.mallextraadmin::lang.email' | trans }}</th>
+        <th scope="col">{{ 'tecnotrade.mallextraadmin::lang.phone' | trans }}</th>
+        <th scope="col">{{ 'tecnotrade.mallextraadmin::lang.impersonate' | trans }}</th>
+        </tr>    
+    </thead>
+    <tbody>
+        {% for item in items %}
+        {% partial __SELF__ ~ '::item' item=item %}
+        {% endfor %}
+    </tbody>    
+</table>

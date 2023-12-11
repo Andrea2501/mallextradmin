@@ -1,0 +1,43 @@
+<form data-request="onAgenteUserLogin" data-request-validate data-request-flash>
+    <h3 class="mall-signup__heading">Login Agente</h3>
+    <div class="mall-form-control">
+            <label for="email">EMail</label>
+            <input id="email" type="text" name="email">
+            <div data-validate-for="email"></div>
+        </div>
+        <div class="mall-form-control">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password">
+            <div data-validate-for="password"></div>
+        </div>
+    </div>
+    <div class="mall-login-terms">
+    <label class="mall-checkbox">
+        <input class="js-mall-toggle-login-terms"
+               type="checkbox"
+               name="terms_accepted"
+               value="1"
+        >
+        <span>
+            {% partial __SELF__ ~ '::terms' %}
+            <div data-validate-for="terms_accepted"></div>
+        </span>
+    </label>
+    </div>
+    <div class="mall-form-actions">
+        <button class="mall-btn mall-btn-login mall-btn--primary mall-btn--full" type="submit">
+            Login
+        </button>
+    </div>
+</form>
+{% put scripts %}
+    <script>
+        $(function () {
+            // Disable the signup  button until the terms are accepted 
+            $('.mall-btn-login').prop('disabled', true)
+            $('.js-mall-toggle-login-terms').on('click', function () {
+                $('.mall-btn-login').prop('disabled', ! this.checked);
+            });
+        })
+    </script>
+{% endput %}

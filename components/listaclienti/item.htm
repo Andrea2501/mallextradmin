@@ -1,0 +1,16 @@
+<tr>
+    <td>{{item.company}}</td>
+    <td>{{item.partitaiva}}</td>
+    <td>{{item.email}}</td>
+    <td>{{item.phone}}</td>
+    <td>
+        <form data-request="onImpersonateCliente" data-request-validate data-request-flash>
+        <input type="hidden" name="idutente" value="{{item.id}}">
+            <div class="mall-form-actions">
+            <button class="mall-btn mall-btn-signup mall-btn--primary mall-btn--full" type="submit">
+                {{ 'tecnotrade.mallextraadmin::lang.use_client' | trans }}
+            </button>
+        </div>
+        </form>
+        </td>
+</tr>
