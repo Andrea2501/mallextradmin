@@ -1,11 +1,27 @@
 $(function () {
     
-    $(document).on("click", "#logout_impersonate_user", function (event) {
+    $(document).on("click", "#btnlogout-agente", function (event) {
         event.preventDefault();
-        var idUser = $(this).attr('data-impersonate-id');
-        alert(idUser);
+        $.ajax({
+            url: "/infoagente/logoutagente",
+            type: "POST",
+            data: {
+              value: 'agente',
+            },
+            success: function (response) {
+              location.href='/';
+              
+            },
+            error: function (xhr, textStatus, errorThrown) {
+              // Gestisci eventuali errori
+              console.log("Errore nella chiamata AJAX:", errorThrown);
+            },
+          });
 
     })
+    function clearPasswordAgent(){
+        $("#agente_password").val('');
+    }
 
     
     

@@ -18,6 +18,8 @@ use Tecnotrade\Mallextraadmin\Classes\SessionVariables as SessionFx;
 use Hash;
 use Random\Engine\Secure;
 use RainLab\User\Facades\Auth;
+use Illuminate\Http\Request;
+use October\Rain\Exception\ApplicationException;
 
 class InfoAgente extends ComponentBase
 {
@@ -124,6 +126,72 @@ class InfoAgente extends ComponentBase
         $this->page["linkToHomeCatalogo"]=$this->property('urlPaginaCatalogo');
         $this->prepareVars();
        
+    }
+
+    public function onLogoutAgente(){
+    $data = post();
+    Cookie::queue('agente', null, -1);
+    Session::forget('agente');
+    if(Auth::getUser()){
+        Auth::logout();
+    }
+    return Redirect::to('/');
+    }
+    public function onLogoutImpersonateUtente(){
+        $data=post();
+        $urlLista=$data["urllistautenti"];
+        if(Auth::getUser()){
+            Auth::logout();
+            $cookieAgente=Cookie::get('agente');
+            if($cookieAgente && !empty($cookieAgente)){
+                $objAgente=json_decode($cookieAgente);
+                if(isset($objAgente->id)){
+                    $agente=Agente::find($objAgente->id);
+                    if($agente){
+                        Session::put('agente',$agente);
+                        $this->prepareVars();
+                    }
+                }
+            }
+            return Redirect::to('/'.$urlLista);
+        }
+
+    }
+    public function onUpdatePasswordAgente(){
+        $data = post();
+        $rules = [
+            'agente_password' => sprintf('required|min:%d|max:255', 8),
+            'agente_password_repeat' => 'required|same:agente_password',
+            
+        ];
+        $messages=[
+            'agente_password.required' => trans('offline.mall::lang.components.signup.errors.password.required'),
+            'agente_password.min'      => trans('offline.mall::lang.components.signup.errors.password.min'),
+            'agente_password.max'      => trans('offline.mall::lang.components.signup.errors.password.max'),
+
+            'agente_password_repeat.required' => trans('offline.mall::lang.components.signup.errors.password_repeat.required'),
+            'agente_password_repeat.same'     => trans('offline.mall::lang.components.signup.errors.password_repeat.same'),
+        ];
+        $validation = Validator::make($data, $rules, $messages);
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
+        }
+        else{
+            $newPassword=$data["agente_password"];
+            $idAgente=$data["idcurrentagente"];
+            $agente=Agente::find($idAgente);
+            if($agente){
+                $agente->password=$newPassword;
+                $agente->save();
+                Flash::success(trans("tecnotrade.mallextraadmin::lang.password_changed_ok"));
+                
+            }
+            else{
+                throw new ApplicationException( trans("tecnotrade.mallextraadmin::lang.agent_invalid"));
+            }
+            
+        }
+        
     }
 
 }

@@ -28,6 +28,9 @@
                 <br>
                 <form data-request="onLogoutImpersonateCliente" data-request-validate data-request-flash>
                     <input type="hidden" name="idutente" value="{{user_impersonate.id}}">
+                    <input type="hidden" name="homeagente" value="{{urlHomeAgente}}">
+                    <input type="hidden" name="listaurl" value="{{urlLista}}">
+                    
                         <div class="mall-form-actions">
                         <button class="mall-btn mall-btn-signup mall-btn--primary mall-btn--full" type="submit">
                             {{ 'tecnotrade.mallextraadmin::lang.unlink_user' | trans }}
@@ -73,3 +76,4 @@
     {% endif %}
 
 {% endif %}
+

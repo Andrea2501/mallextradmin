@@ -37,6 +37,10 @@
     'used_user'=>'Stai usando il cliente:',
     'unlink_user'=>'Cambia utente', 
     'goto_customer_list'=>'Vai a elenco clienti',
-    'goto_home_agente'=>'Torna alla home' 
+    'goto_home_agente'=>'Torna alla home', 
+    'logout_agente'=>'Logout Agente',
+    'mod_password_agente'=>'Modifica Password',  
+    'agent_invalid'=>'L\'agente non sembra valido',
+    'password_changed_ok'=>'Password aggiornata correttamente.'   
          
 ];

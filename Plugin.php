@@ -28,6 +28,11 @@ class Plugin extends PluginBase
         Route::post('/listaclienti/impersonatecliente',function(\Illuminate\Http\Request $request) {
             return (new \Tecnotrade\Mallextraadmin\Components\ListaClienti())->onImpersonateCliente($request);
         });
+
+        Route::post('/infoagente/logoutagente',function(\Illuminate\Http\Request $request) {
+            return (new \Tecnotrade\Mallextraadmin\Components\InfoAgente())->onLogoutAgente($request);
+        });
+        
     }
 
     /**

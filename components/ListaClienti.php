@@ -20,6 +20,7 @@ use Hash;
 use Input;
 use Illuminate\Http\Request; 
 use Auth;
+use Cookie;
 
 
 
@@ -47,6 +48,7 @@ class ListaClienti extends ComponentBase
                     ],
                 ],
             ],
+            
         ];
             
     }
@@ -58,9 +60,10 @@ public $nomeCliente;
 public $frontendUser;
 public $pageHomeAgente;
 
-
 protected function prepareVars(){
-    $this->page["urlHomeAgente"]=$this->property('urlPaginaHomeAgenti'); 
+    $this->page["urlHomeAgente"]=$this->property('urlPaginaHomeAgenti');
+    
+    $this->page["urlLista"]=$this->page->url;
     $this->pageHomeAgente=$this->property('urlPaginaHomeAgenti');
         if(Session::has('agente')){
             if(Session::get('agente')){
@@ -146,9 +149,26 @@ public function onImpersonateCliente(){
     return Redirect::to('/'.$this->property('urlPaginaHomeAgenti'));
 }
 public function onLogoutImpersonateCliente(){
-    Auth::logout();
-    return Redirect::to('/'.$this->property('urlPaginaHomeAgenti'));
+    $data=post();
+    $urlLista=$data["listaurl"];
+    if(Auth::getUser()){
+        Auth::logout();
+        $cookieAgente=Cookie::get('agente');
+        if($cookieAgente && !empty($cookieAgente)){
+            $objAgente=json_decode($cookieAgente);
+            if(isset($objAgente->id)){
+                $agente=Agente::find($objAgente->id);
+                if($agente){
+                    Session::put('agente',$agente);
+                    $this->prepareVars();
+                }
+            }
+        }
+        return Redirect::to($urlLista.'?page=1');
+    }
+
 }
+
     
 
 

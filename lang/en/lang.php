@@ -37,5 +37,9 @@
     'used_user'=>'You are using customer:',
     'unlink_user'=>'Unlink current user',
     'goto_customer_list'=>'Go to Customers List',
-    'goto_home_agente'=>'Got Home page Agente',       
+    'goto_home_agente'=>'Got Home page Agente', 
+    'logout_agente'=>'Agent Logout',
+    'mod_password_agente'=>'Update Password',
+    'agent_invalid'=>'Agent is not valid!',
+    'password_changed_ok'=>'Password update successfully.'       
 ];
